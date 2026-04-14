@@ -1,99 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Scan Results</title>
+<title>Scan Result</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #ffffff;
-            text-align: center;
-            margin: 0;
-            padding: 40px;
-        }
+<style>
+body {
+    background: black;
+    color: #00ff9f;
+    font-family: monospace;
+    padding: 20px;
+}
 
-        h2 {
-            font-size: 26px;
-            margin-top: 30px;
-        }
+.container {
+    border: 1px solid #00ff9f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff9f;
+}
 
-        .result-row {
-            font-size: 20px;
-            margin: 10px 0;
-        }
+h2 {
+    color: cyan;
+}
 
-        .success {
-            color: green;
-            font-weight: bold;
-        }
+.result {
+    margin-top: 20px;
+    line-height: 1.8;
+}
 
-        .fail {
-            color: red;
-            font-weight: bold;
-        }
-
-        a {
-            display: block;
-            margin-top: 25px;
-            font-size: 18px;
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+span {
+    color: yellow;
+}
+</style>
 </head>
 
 <body>
 
-    <h1>WEB APPLICATION VULNERABILITY SCANNER</h1>
+<div class="container">
+    <h2>🔍 Scanning Target: <span>{{ url }}</span></h2>
 
-    <h2>Scan Results for: {{ url }}</h2>
-
-    <div class="result-row">
-        SQL Injection:
-        {% if sql_status %}
-            <span class="success">✔️ No SQL Injection Found</span>
-        {% else %}
-            <span class="fail">❌ SQL Injection Detected</span>
-        {% endif %}
+    <div class="result">
+        <p>💉 SQL Injection: {{ sql }}</p>
+        <p>⚡ XSS Attack: {{ xss }}</p>
     </div>
-
-    <div class="result-row">
-        XSS:
-        {% if xss_status %}
-            <span class="success">✔️ No XSS Found</span>
-        {% else %}
-            <span class="fail">❌ XSS Found</span>
-        {% endif %}
-    </div>
-
-    <div class="result-row">
-        Security Headers:
-        {% if header_status %}
-            <span class="success">✔️ All Security Headers Present</span>
-        {% else %}
-            <span class="fail">❌ Missing Security Headers</span>
-        {% endif %}
-    </div>
-
-    <div class="result-row">
-        Directories:
-        {% if dir_status %}
-            <span class="success">✔️ No sensitive directories</span>
-        {% else %}
-            <span class="fail">❌ Sensitive directories found</span>
-        {% endif %}
-    </div>
-
-    <div class="result-row">
-        Cookies:
-        <span class="success">✔️ Cookies are secure</span>
-    </div>
-
-    <a href="{% url 'scan' %}">Scan Again</a>
+</div>
 
 </body>
 </html>
